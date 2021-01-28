@@ -1,0 +1,50 @@
+{
+  "name": "openrum",
+  "version": "1.0.0",
+  "description": "Real User Monitoring",
+  "main": "app/openrum.js",
+  "scripts": {
+    "start": "npm run build:dev",
+    "test": "jest --verbose --coverage",
+    "test:local": "jest --coverage",
+    "build:dev": "npm run eslint && gulp build:dev && webpack-dev-server --config webpack.dev.config.js",
+    "build:prod": "npm run eslint && gulp build:prod",
+    "eslint": "./node_modules/.bin/eslint  --ext .js ./",
+    "minify-injection": "uglifyjs -b --compress --mangle -p bare_returns --output injection.min.js -- injection.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+TODO"
+  },
+  "author": "Piio, Inc.",
+  "license": "ISC",
+  "homepage": "TODO",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-rewire": "^1.2.0",
+    "chai": "^4.2.0",
+    "del": "^3.0.0",
+    "ejs": "^2.5.6",
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "express": "^4.16.4",
+    "gulp": "^4.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify": "^3.0.2",
+    "jest-cli": "^24.8.0",
+    "pump": "^1.0.3",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "npm": "^6.5.0",
+    "uglify-js": "^3.8.0"
+  }
+}
