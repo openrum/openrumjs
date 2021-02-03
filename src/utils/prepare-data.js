@@ -17,10 +17,15 @@ import {
 } from '../constants/constants';
 import getDeviceType from './device';
 
-export default function prepareData() {
+export default function prepareData(performanceObject) {
   const data = {};
-  const timings = performance.timing;
-  const pageNav = performance.getEntriesByType('navigation')[0];
+  if (Object.entries(performanceObject).length === 0) {
+    return false;
+  }
+  const timings = performanceObject.timing;
+  const pageNav = (typeof performanceObject.getEntriesByType === 'function' ?
+    performanceObject.getEntriesByType('navigation')[0] : null);
+  const print = (typeof performanceObject.getEntriesByType === 'function' ? performance.getEntriesByType('paint') : null);
 
   data.origin = window.location.href;
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
@@ -91,7 +96,7 @@ export default function prepareData() {
     data.pageLoadTime = timings.loadEventStart - timings.navigationStart;
   }
 
-  if ((PAINT === 1) && (performance.getEntriesByType('paint').length > 0)) {
+  if ((PAINT === 1) && (print)) {
     data.firstPaint = (performance.getEntriesByName('first-paint').length > 0 ?
       performance.getEntriesByName('first-paint')[0].startTime : null);
     data.firstContenfulPaint = (performance.getEntriesByName('first-contentful-paint').length > 0 ?
