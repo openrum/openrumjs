@@ -17,10 +17,11 @@ import {
 import getDeviceType from './device';
 
 export default function prepareData(performanceObject) {
-  const data = {};
-  if (!performanceObject && Object.keys(performanceObject).length === 0) {
+  if (!performanceObject || Object.keys(performanceObject).length === 0) {
     return false;
   }
+
+  const data = {};
   const timings = performanceObject.timing;
   const pageNav = (typeof performanceObject.getEntriesByType === 'function' ?
     performanceObject.getEntriesByType('navigation')[0] : null);
