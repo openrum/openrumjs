@@ -17,7 +17,8 @@ import {
 import getDeviceType from './device';
 
 export default function prepareData(performanceObject) {
-  if (!performanceObject || Object.keys(performanceObject).length === 0) {
+  if (!performanceObject ||
+    (JSON.stringify(performanceObject) === JSON.stringify({}))) {
     return false;
   }
 

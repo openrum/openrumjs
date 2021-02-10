@@ -9,5 +9,7 @@ window.addEventListener('load', () => {
 
 function init() {
   const data = prepareData(performance);
-  sendData(data);
+  if (data) {
+    sendData(data);
+  }
 }
