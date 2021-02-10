@@ -8,6 +8,6 @@ window.addEventListener('load', () => {
 });
 
 function init() {
-  const data = prepareData();
+  const data = prepareData(performance);
   sendData(data);
 }

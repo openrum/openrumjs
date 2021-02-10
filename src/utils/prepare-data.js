@@ -3,7 +3,6 @@ import {
   DOM_COMPLETE,
   DOM_CONTENT_LOADED,
   DOM_INTERACTIVE,
-  DOM_LOADING,
   LATENCY,
   LOAD,
   REQUEST,
@@ -19,13 +18,14 @@ import getDeviceType from './device';
 
 export default function prepareData(performanceObject) {
   const data = {};
-  if (Object.entries(performanceObject).length === 0) {
+  if (!performanceObject && Object.keys(performanceObject).length === 0) {
     return false;
   }
   const timings = performanceObject.timing;
   const pageNav = (typeof performanceObject.getEntriesByType === 'function' ?
     performanceObject.getEntriesByType('navigation')[0] : null);
-  const print = (typeof performanceObject.getEntriesByType === 'function' ? performance.getEntriesByType('paint') : null);
+  const print = (typeof performanceObject.getEntriesByType === 'function' ?
+    performance.getEntriesByType('paint') : null);
 
   data.origin = window.location.href;
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
@@ -53,6 +53,7 @@ export default function prepareData(performanceObject) {
     data.secureConnectionStart = timings.secureConnectionStart;
     data.unloadEventStart = timings.unloadEventStart;
     data.unloadEventEnd = timings.unloadEventEnd;
+    data.domLoading = timings.domLoading;
   }
 
   if (DOM_COMPLETE === 1) {
@@ -66,10 +67,6 @@ export default function prepareData(performanceObject) {
   if (DOM_INTERACTIVE === 1) {
     data.timeToInteractive = timings.domInteractive - timings.domLoading;
     data.iteractiveToComplete = timings.domComplete - timings.domInteractive;
-  }
-
-  if (DOM_LOADING === 1) {
-    data.domLoading = timings.domLoading;
   }
 
   if (LATENCY === 1) {
