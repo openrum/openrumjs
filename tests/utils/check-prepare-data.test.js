@@ -9,7 +9,7 @@ import performanceObject from './performanceObject';
 describe('Prepare data - ', function() {
   it('Performance object null', function() {
 
-    const result = prepareData({});
+    const result = prepareData(null);
     expect(result).to.equal(false);
   });
 

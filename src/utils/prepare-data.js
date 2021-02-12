@@ -18,7 +18,7 @@ import getDeviceType from './device';
 
 export default function prepareData(performanceObject) {
   if (!performanceObject ||
-    (JSON.stringify(performanceObject) === JSON.stringify({}))) {
+    (typeof performanceObject !== 'object') || (performanceObject === null)) {
     return false;
   }
 
@@ -118,6 +118,5 @@ export default function prepareData(performanceObject) {
   if (TTFB === 1) {
     data.ttfb = timings.responseStart - timings.navigationStart;
   }
-
   return data;
 }
