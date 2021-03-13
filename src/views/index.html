@@ -8,9 +8,15 @@
 </head>
 
 <body>
-  <h1>OpenRUM test app</h1>
+  <h1 id="title">OpenRUM test app</h1>
   <h3>Look at the console</h3>
   <script src="./openrum.dev.min.js"></script>
 </body>
+<script>
+  //Set to calculate CLS
+  setTimeout(function() {
+    document.getElementById("title").style.margin = "20px";
+  }, 0);
+</script>
 
 </html>

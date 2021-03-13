@@ -15,24 +15,25 @@ import {
   TTFB
 } from '../constants/constants';
 import getDeviceType from './device';
+import getBrowser from './browser';
 
 export default function prepareData(performanceObject) {
   if (!performanceObject ||
     (typeof performanceObject !== 'object') || (performanceObject === null)) {
     return false;
   }
-
   const data = {};
   const timings = performanceObject.timing;
   const pageNav = (typeof performanceObject.getEntriesByType === 'function' ?
     performanceObject.getEntriesByType('navigation')[0] : null);
-  const print = (typeof performanceObject.getEntriesByType === 'function' ?
+  const paint = (typeof performanceObject.getEntriesByType === 'function' ?
     performance.getEntriesByType('paint') : null);
 
   data.origin = window.location.href;
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   data.effectiveConnectionType = (connection ? connection.effectiveType : null);
   data.device = getDeviceType();
+  data.browser = getBrowser();
 
   if (TIMESTAMPS === 1) {
     data.connectStart = timings.connectStart;
@@ -60,6 +61,7 @@ export default function prepareData(performanceObject) {
 
   if (DOM_COMPLETE === 1) {
     data.domLoad = timings.domComplete - timings.domLoading;
+    data.fullyLoad = timings.domComplete - timings.responseStart;
   }
 
   if (DOM_CONTENT_LOADED === 1) {
@@ -95,11 +97,11 @@ export default function prepareData(performanceObject) {
     data.pageLoadTime = timings.loadEventStart - timings.navigationStart;
   }
 
-  if ((PAINT === 1) && (print)) {
-    data.firstPaint = (performance.getEntriesByName('first-paint').length > 0 ?
-      performance.getEntriesByName('first-paint')[0].startTime : null);
-    data.firstContenfulPaint = (performance.getEntriesByName('first-contentful-paint').length > 0 ?
-      performance.getEntriesByName('first-contentful-paint')[0].startTime : null);
+  if ((PAINT === 1) && (paint)) {
+    data.firstPaint = (paint.length > 0 ?
+      paint[0].startTime : null);
+    data.firstContenfulPaint = (paint.length > 0 ?
+      paint[1].startTime : null);
     data.largestContentfulPaint = 0;
     const entries = performance.getEntries();
     for (let i = 0; i < entries.length; i++) {
