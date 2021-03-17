@@ -9,7 +9,6 @@ new PerformanceObserver((entryList) => {
       cls += e.value;
     }
   });
-  console.log(cls);
 }).observe({ type: 'layout-shift', buffered: true });
 
 window.addEventListener('load', () => {

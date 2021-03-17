@@ -100,7 +100,7 @@ export default function prepareData(performanceObject) {
   if ((PAINT === 1) && (paint)) {
     data.firstPaint = (paint.length > 0 ?
       paint[0].startTime : null);
-    data.firstContenfulPaint = (paint.length > 0 ?
+    data.firstContenfulPaint = (paint.length > 1 ?
       paint[1].startTime : null);
     data.largestContentfulPaint = 0;
     const entries = performance.getEntries();
