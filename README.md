@@ -1,10 +1,10 @@
-#OpenRUM
+# OpenRUM
 
 This library...
 
 [Official Site](https://piio.co/ "Official Site")
 
-#Development
+## Development
 In order to build OpenRUM you need to have installed node, gulp-cli.
 
 1. Insall node: [Node Installer](https://nodejs.org/en/download/ "Node Installer")
@@ -17,7 +17,7 @@ npm install --global gulp-cli
 npm install
 ```
 
-##Build Development
+## Build Development
 In order to build development you need to run:
 
     npm start
@@ -32,7 +32,7 @@ The application is going to be runned in watch mode so you can make changes and 
 
 IMPORTANT: The cdn dev urls are used.-
 
-##Build Production
+## Build Production
 
 In order to build production you need to run:
 
