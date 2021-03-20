@@ -1,4 +1,5 @@
 # OpenRUM
+[![Build Status](https://travis-ci.com/openrum/openrumjs.svg?branch=main)](https://travis-ci.com/openrum/openrumjs)
 
 This library...
 
