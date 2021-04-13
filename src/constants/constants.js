@@ -1,4 +1,5 @@
 const API_URL = 'https://kp8u6kngy6.execute-api.us-east-1.amazonaws.com/default/wpa-rum';
+const DEBUG = 0;
 const TIMESTAMPS = 0;
 const DOM_COMPLETE = 1;
 const DOM_CONTENT_LOADED = 1;
@@ -17,6 +18,7 @@ const TTFB = 1;
 
 export {
   API_URL,
+  DEBUG,
   TIMESTAMPS,
   DOM_COMPLETE,
   DOM_CONTENT_LOADED,

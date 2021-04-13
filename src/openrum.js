@@ -1,5 +1,6 @@
 import prepareData from './utils/prepare-data';
 import sendData from './utils/send-data';
+import { DEBUG } from './constants/constants';
 
 let cls = 0;
 new PerformanceObserver((entryList) => {
@@ -7,6 +8,9 @@ new PerformanceObserver((entryList) => {
   entries.forEach((e) => {
     if (!e.hadRecentInput) {
       cls += e.value;
+      if (DEBUG) {
+        console.log('Current CLS value:', cls, e);
+      }
     }
   });
 }).observe({ type: 'layout-shift', buffered: true });
