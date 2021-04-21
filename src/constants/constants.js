@@ -1,4 +1,4 @@
-const API_URL = 'https://kp8u6kngy6.execute-api.us-east-1.amazonaws.com/default/wpa-rum';
+const API_URL = 'http://localhost:5100';
 const DEBUG = 0;
 const TIMESTAMPS = 0;
 const DOM_COMPLETE = 1;

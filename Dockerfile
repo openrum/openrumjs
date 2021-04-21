@@ -12,6 +12,7 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 RUN npm install -g nodemon gulp-cli
+
 RUN npm install
 
 COPY . .

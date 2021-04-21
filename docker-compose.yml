@@ -1,4 +1,3 @@
-
 version: '3.1'
 services:
     openrum:
@@ -8,6 +7,15 @@ services:
       command: npm run build:dev
       ports:
         - 5000:5000
+    api:
+      build: ../openrum-api/.
+      user: "node"
+      working_dir: /home/node/app
+      volumes:
+        - ../openrum-api/.:/home/node/app
+      command: "npm run dev"
+      ports:
+        - 5100:5100
     mongo:
       image: mongo
       environment:
