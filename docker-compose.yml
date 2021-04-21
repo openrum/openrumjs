@@ -19,6 +19,7 @@ services:
         - 5100:5100
     mongo:
       image: mongo
+      restart: always
       environment:
         MONGO_INITDB_ROOT_USERNAME: root
         MONGO_INITDB_ROOT_PASSWORD: root
@@ -28,6 +29,8 @@ services:
         - "mongo-data:/data/db"
     mongo-express:
       image: mongo-express
+      depends_on:
+        - mongo
       restart: always
       ports:
         - 8081:8081
