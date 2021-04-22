@@ -1,11 +1,19 @@
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
   entry: './src/openrum.js',
   output: {
     filename: 'openrum.dev.min.js'
   },
+  node: {
+    fs: 'empty'
+  },
   mode: 'development',
   devtool: 'source-map',
   watch: true,
+  plugins: [
+    new Dotenv()
+  ],
   module: {
     rules: [{
       test: /\.js$/,

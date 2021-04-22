@@ -4,7 +4,7 @@ FROM node:12.18
 ENV NPM_CONFIG_LOGLEVEL info
 
 # Create app directory
-WORKDIR /home/node/app
+WORKDIR /home/node/app/js
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -17,7 +17,7 @@ RUN npm install
 
 COPY . .
 
-ADD . /home/node/app
+ADD . /home/node/app/js
 
 EXPOSE 5000
 

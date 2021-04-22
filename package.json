@@ -44,6 +44,8 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
+    "dotenv-webpack": "^7.0.2",
+    "fs": "0.0.1-security",
     "npm": "^6.5.0",
     "uglify-js": "^3.8.0"
   }
