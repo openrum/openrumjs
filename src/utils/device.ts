@@ -1,4 +1,4 @@
-export default function getDeviceType() {
+function getDeviceType() : string {
   const ua = navigator.userAgent;
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
     return 'tablet';
@@ -12,3 +12,5 @@ export default function getDeviceType() {
   }
   return 'desktop';
 }
+
+export { getDeviceType };

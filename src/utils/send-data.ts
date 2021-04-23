@@ -1,8 +1,7 @@
-import {
-  API_URL
-} from '../constants/constants';
+import { API_URL } from '../constants/constants';
+import { DataObject } from '../types/dataObject';
 
-export default function sendData(data) {
+function sendData(data : DataObject) : void {
   let notBeacon = true;
   const send = JSON.stringify(data);
   // Check for sendBeacon support:
@@ -18,3 +17,5 @@ export default function sendData(data) {
     xhr.send(send);
   }
 }
+
+export { sendData }

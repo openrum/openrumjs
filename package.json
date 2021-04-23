@@ -2,15 +2,19 @@
   "name": "openrum",
   "version": "1.0.0",
   "description": "Real User Monitoring",
-  "main": "app/openrum.js",
+  "main": "./dist/openrum.js",
+  "types": "./dist/openrum.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
+    "compile": "tsc",
     "start": "npm run build:dev",
     "test": "jest --verbose --coverage",
     "test:local": "jest --coverage",
-    "build:dev": "npm run eslint && gulp build:dev && webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0",
-    "build:prod": "npm run eslint && gulp build:prod",
-    "eslint": "./node_modules/.bin/eslint  --ext .js ./",
-    "minify-injection": "uglifyjs -b --compress --mangle -p bare_returns --output injection.min.js -- injection.js"
+    "build:dev": " gulp build:dev && tsc && webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0",
+    "build:prod": "gulp build:prod && tsc && webpack --config webpack.prod.config.js",
+    "minify-injection": "uglifyjs -b --compress --mangle -p bare_returns --output ./dist/openrum.min.js -- ./dist/openrum.js"
   },
   "repository": {
     "type": "git",
@@ -20,33 +24,36 @@
   "license": "ISC",
   "homepage": "TODO",
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-eslint": "^10.0.1",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-typescript": "^7.13.0",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-rewire": "^1.2.0",
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "del": "^3.0.0",
     "ejs": "^2.5.6",
-    "eslint": "^5.12.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb": "^18.2.1",
     "express": "^4.16.4",
     "gulp": "^4.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "jest-cli": "^24.8.0",
-    "pump": "^1.0.3",
+    "ts-loader": "^9.1.0",
+    "ts-loader-utils": "^1.1.2",
+    "typescript": "^4.2.4",
+    "uglify-js": "^3.13.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
     "dotenv-webpack": "^7.0.2",
+    "fork-ts-checker-webpack-plugin": "^6.2.4",
     "fs": "0.0.1-security",
-    "npm": "^6.5.0",
-    "uglify-js": "^3.8.0"
+    "npm": "^6.14.13"
   }
 }

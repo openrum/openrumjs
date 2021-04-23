@@ -1,5 +1,5 @@
-/* global opr */
-export default function getBrowser() {
+// @ts-nocheck
+function getBrowser() {
   // Opera 8.0+
   if ((!!window.opr && !!opr.addons) || !!window.opera ||
   navigator.userAgent.indexOf(' OPR/') >= 0) {
@@ -13,11 +13,11 @@ export default function getBrowser() {
 
   // Safari 3.0+ "[object HTMLElementConstructor]"
   if (/constructor/i.test(window.HTMLElement) ||
-   (function(p) {
+   ((p) => {
      return p.toString() ===
             '[object SafariRemoteNotification]';
-   }(!window.safari ||
-       (typeof safari !== 'undefined' && window.safari.pushNotification)))) {
+   })(!window.safari ||
+       (typeof safari !== 'undefined' && window.safari.pushNotification))) {
     return 'Safari';
   }
 
@@ -39,4 +39,7 @@ export default function getBrowser() {
     }
     return 'Chrome';
   }
+  return 'undefined';
 }
+
+export { getBrowser };

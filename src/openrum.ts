@@ -1,11 +1,12 @@
-import prepareData from './utils/prepare-data';
-import sendData from './utils/send-data';
+import { prepareData } from './utils/prepare-data';
+import { sendData } from './utils/send-data';
+import { DataObject } from './types/dataObject';
 import { DEBUG } from './constants/constants';
 
 let cls = 0;
 new PerformanceObserver((entryList) => {
   const entries = entryList.getEntries() || [];
-  entries.forEach((e) => {
+  entries.forEach((e : any) => {
     if (!e.hadRecentInput) {
       cls += e.value;
       if (DEBUG) {
@@ -17,12 +18,12 @@ new PerformanceObserver((entryList) => {
 
 window.addEventListener('load', () => {
   if ('performance' in window) {
-    setTimeout(function() { init(); }, 0);
+    setTimeout(() => { init(); }, 0);
   }
 });
 
 function init() {
-  const data = prepareData(performance);
+  const data : DataObject = prepareData(performance);
   if (data) {
     data.cls = cls;
     sendData(data);

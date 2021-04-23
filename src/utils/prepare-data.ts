@@ -14,15 +14,18 @@ import {
   COMPRESSION,
   TTFB
 } from '../constants/constants';
-import getDeviceType from './device';
-import getBrowser from './browser';
+import { getDeviceType } from './device';
+import { getBrowser } from './browser';
+import { DataObject } from '../types/dataObject';
 
-export default function prepareData(performanceObject) {
+declare var navigator : any;
+
+function prepareData(performanceObject : any ) : DataObject {
   if (!performanceObject ||
     (typeof performanceObject !== 'object') || (performanceObject === null)) {
-    return false;
+      throw new Error('Empty object');
   }
-  const data = {};
+  const data : DataObject = new DataObject();
   const timings = performanceObject.timing;
   const pageNav = (typeof performanceObject.getEntriesByType === 'function' ?
     performanceObject.getEntriesByType('navigation')[0] : null);
@@ -104,8 +107,8 @@ export default function prepareData(performanceObject) {
       paint[1].startTime : null);
     data.largestContentfulPaint = 0;
     const entries = performance.getEntries();
-    for (let i = 0; i < entries.length; i++) {
-      data.largestContentfulPaint = Math.max(data.largestContentfulPaint, entries[i].startTime);
+    for (const entry of entries) {
+      data.largestContentfulPaint = Math.max(data.largestContentfulPaint, entry.startTime);
     }
   }
 
@@ -122,3 +125,5 @@ export default function prepareData(performanceObject) {
   }
   return data;
 }
+
+export { prepareData }

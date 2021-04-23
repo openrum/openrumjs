@@ -1,7 +1,15 @@
+const Dotenv = require('dotenv-webpack');
+const path = require('path');
+
 module.exports = {
+  entry: './dist/openrum.js',
   output: {
-    filename: 'openrum.min.js'
+    filename: 'openrum.min.js',
+    path: path.resolve(__dirname, 'dist')
   },
+  plugins: [
+    new Dotenv()
+  ],
   mode: 'production',
   module: {
     rules: [{

@@ -1,32 +1,36 @@
 module.exports = {
-  "extends": "airbnb-base",
-  "env": {
-    "browser": true,
+  extends: 'airbnb-base',
+  env: {
+    browser: true
   },
-  "rules": {
-    "linebreak-style": 0,
-    "comma-dangle": ["error", "never"],
-    "no-use-before-define": ["error", {
-      "functions": false,
-      "classes": true
+  rules: {
+    'linebreak-style': 0,
+    'comma-dangle': ['error', 'never'],
+    'no-use-before-define': ['error', {
+      functions: false,
+      classes: true
     }],
-    "space-before-function-paren": ["error", "never"],
-    "func-names": ["error", "never"],
-    "no-plusplus": ["error", {
-      "allowForLoopAfterthoughts": true
+    'space-before-function-paren': ['error', 'never'],
+    'func-names': ['error', 'never'],
+    'no-plusplus': ['error', {
+      allowForLoopAfterthoughts: true
     }],
-    "no-param-reassign": ["error", {
-      "props": false
+    'no-param-reassign': ['error', {
+      props: false
     }],
-    "operator-linebreak": ["error", "after"],
-    "no-nested-ternary": 0,
-    "consistent-return": 0,
-    "eol-last": 0,
-    "max-len": ["error", {
-      "code": 120
+    'operator-linebreak': ['error', 'after'],
+    'no-nested-ternary': 0,
+    'consistent-return': 0,
+    'eol-last': 0,
+    'max-len': ['error', {
+      code: 150
     }],
-    "prefer-default-export": 0,
-    "import/prefer-default-export": "off",
-    "prefer-arrow-callback": 0
+    'prefer-default-export': 0,
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": false
+    }, {
+      "enforceForRenamedProperties": false
+    }]
   }
 };
