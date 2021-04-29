@@ -7,8 +7,17 @@ function getBrowser() {
   }
 
   // Firefox 1.0+
-  if (typeof InstallTrigger !== 'undefined') {
+  if ((typeof InstallTrigger !== 'undefined') || (navigator.userAgent.indexOf('Firefox') !== -1)) {
     return 'Firefox';
+  }
+
+  // Chrome 1 - 79
+  if (!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)) {
+    // Edge (based on chromium) detection
+    if (navigator.userAgent.indexOf('Edg') !== -1) {
+      return 'EdgeChromium';
+    }
+    return 'Chrome';
   }
 
   // Safari 3.0+ "[object HTMLElementConstructor]"
@@ -29,15 +38,6 @@ function getBrowser() {
   }
   if (!isIE && !!window.StyleMedia) {
     return 'Edge';
-  }
-
-  // Chrome 1 - 79
-  if (!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)) {
-    // Edge (based on chromium) detection
-    if (navigator.userAgent.indexOf('Edg') !== -1) {
-      return 'EdgeChromium';
-    }
-    return 'Chrome';
   }
   return 'undefined';
 }

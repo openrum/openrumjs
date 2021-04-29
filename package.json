@@ -12,21 +12,23 @@
     "start": "npm run build:dev",
     "test": "jest --verbose --coverage",
     "test:local": "jest --coverage",
-    "build:dev": " gulp build:dev && tsc && webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0",
-    "build:prod": "gulp build:prod && tsc && webpack --config webpack.prod.config.js",
-    "minify-injection": "uglifyjs -b --compress --mangle -p bare_returns --output ./dist/openrum.min.js -- ./dist/openrum.js"
+    "build:dev": " gulp build:dev && npm run compile && webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0",
+    "build:prod": "gulp build:prod && npm run compile && webpack --config webpack.prod.config.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+TODO"
+    "url": "https://github.com/openrum/openrumjs"
   },
   "author": "Piio, Inc.",
-  "license": "ISC",
+  "license": "See license in LICENSE",
   "homepage": "TODO",
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/chai": "^4.2.17",
+    "@types/jest": "^26.0.23",
+    "@types/jsdom": "^16.2.10",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-rewire": "^1.2.0",
@@ -42,10 +44,10 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "jest-cli": "^24.8.0",
+    "ts-jest": "^26.5.5",
     "ts-loader": "^9.1.0",
     "ts-loader-utils": "^1.1.2",
     "typescript": "^4.2.4",
-    "uglify-js": "^3.13.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-stream": "^5.2.1"

@@ -23,18 +23,20 @@ declare var navigator : any;
 function prepareData(performanceObject : any ) : DataObject {
   if (!performanceObject ||
     (typeof performanceObject !== 'object') || (performanceObject === null)) {
-      throw new Error('Empty object');
+      throw new Error('Performance object is empty');
   }
   const data : DataObject = new DataObject();
   const timings = performanceObject.timing;
   const pageNav = (typeof performanceObject.getEntriesByType === 'function' ?
     performanceObject.getEntriesByType('navigation')[0] : null);
   const paint = (typeof performanceObject.getEntriesByType === 'function' ?
-    performance.getEntriesByType('paint') : null);
+    performance.getEntriesByType('paint') : undefined);
 
-  data.origin = window.location.href;
-  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  data.effectiveConnectionType = (connection ? connection.effectiveType : null);
+  data.origin = (window ? window.location.href : undefined);
+  if (navigator) {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    data.effectiveConnectionType = (connection ? connection.effectiveType : undefined);
+  }
   data.device = getDeviceType();
   data.browser = getBrowser();
 
@@ -102,9 +104,9 @@ function prepareData(performanceObject : any ) : DataObject {
 
   if ((PAINT === 1) && (paint)) {
     data.firstPaint = (paint.length > 0 ?
-      paint[0].startTime : null);
+      paint[0].startTime : undefined);
     data.firstContenfulPaint = (paint.length > 1 ?
-      paint[1].startTime : null);
+      paint[1].startTime : undefined);
     data.largestContentfulPaint = 0;
     const entries = performance.getEntries();
     for (const entry of entries) {

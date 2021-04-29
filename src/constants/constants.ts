@@ -1,6 +1,6 @@
 const API_URL = process.env.API_URL || 'https://localhost:5100';
 const DEBUG = process.env.DEBUG || 0;
-const TIMESTAMPS = parseInt(process.env.TIMESTAMPS, 2) || 0;
+const TIMESTAMPS = (process.env.TIMESTAMPS ? parseInt(process.env.TIMESTAMPS, 2) : 0);
 const DOM_COMPLETE = process.env.DOM_COMPLETE || 1;
 const DOM_CONTENT_LOADED = process.env.DOM_CONTENT_LOADED || 1;
 const DOM_INTERACTIVE = process.env.DOM_INTERACTIVE || 1;

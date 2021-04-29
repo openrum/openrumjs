@@ -1,4 +1,4 @@
-export default function performanceObject() {
+function performanceObject() : object {
   return {
           "timeOrigin": 1611856219144.0479,
           "timing": {
@@ -30,3 +30,5 @@ export default function performanceObject() {
             }
         };
 }
+
+export { performanceObject }
