@@ -7,15 +7,17 @@ import { JSDOM } from 'jsdom';
 const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
 const { window } = jsdom;
 
-let windowContext: any = window;
-  if (window.frameElement &&
-   window.frameElement.getAttribute('tiledesk_context') === 'parent') {
-    windowContext = window.parent;
-  }
+beforeEach(() => {
+  let windowContext: any = window;
+    if (window.frameElement &&
+     window.frameElement.getAttribute('tiledesk_context') === 'parent') {
+      windowContext = window.parent;
+    }
 
-global.window = windowContext;
-global.navigator = windowContext.navigator;
-
+    global.window = windowContext;
+    global.navigator = windowContext.navigator;
+    global.document = windowContext.document;
+})
 
 describe('Prepare data : ', () => {
   it('Performance object null', () => {

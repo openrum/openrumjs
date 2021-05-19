@@ -2,3 +2,4 @@ gulpfile.js
 /dist
 /tests
 *.ts
+/coverage

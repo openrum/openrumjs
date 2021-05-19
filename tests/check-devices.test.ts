@@ -13,35 +13,35 @@ const userAgents = {
 }
 
 let agent : any;
-let windowContext: any = window;
-if (window.frameElement &&
-  window.frameElement.getAttribute('tiledesk_context') === 'parent') {
-  windowContext = window.parent;
-}
-
-global.window = windowContext;
-global.navigator = windowContext.navigator;
 
 beforeEach(() => {
   agent = jest.spyOn(window.navigator, 'userAgent', 'get');
+  let windowContext: any = window;
+  if (window.frameElement &&
+    window.frameElement.getAttribute('tiledesk_context') === 'parent') {
+    windowContext = window.parent;
+  }
+  global.window = windowContext;
+  global.navigator = windowContext.navigator;
+  global.document = windowContext.document;
 })
 
 describe('Devices : ', () => {
   it('Phone', () => {
     agent.mockReturnValue(userAgents.phone);
     const result = prepareData(performanceObject());
-    expect(result.device).to.be.equal('phone');
+    expect(result.device?.type).to.be.equal('phone');
   });
 
   it('Tablet', () => {
     agent.mockReturnValue(userAgents.tablet);
     const result = prepareData(performanceObject());
-    expect(result.device).to.be.equal('tablet');
+    expect(result.device?.type).to.be.equal('tablet');
   });
 
   it('Desktop', () => {
     agent.mockReturnValue(userAgents.desktop);
     const result = prepareData(performanceObject());
-    expect(result.device).to.be.equal('desktop');
+    expect(result.device?.type).to.be.equal('desktop');
   });
 });

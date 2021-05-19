@@ -15,6 +15,7 @@ const PAINT = process.env.PAINT || 1;
 const DNS = process.env.DNS || 1;
 const COMPRESSION = process.env.COMPRESSION || 1;
 const TTFB = process.env.TTFB || 1;
+const TRANSFER = process.env.TRANSFER || 1;
 
 export {
   API_URL,
@@ -33,5 +34,6 @@ export {
   PAINT,
   DNS,
   COMPRESSION,
-  TTFB
+  TTFB,
+  TRANSFER
 };

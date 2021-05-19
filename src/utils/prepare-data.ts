@@ -12,9 +12,10 @@ import {
   PAINT,
   DNS,
   COMPRESSION,
-  TTFB
+  TTFB,
+  TRANSFER
 } from '../constants/constants';
-import { getDeviceType } from './device';
+import { getDeviceType, getDeviceOS } from './device';
 import { getBrowser } from './browser';
 import { DataObject } from '../types/dataObject';
 
@@ -37,7 +38,13 @@ function prepareData(performanceObject : any ) : DataObject {
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     data.effectiveConnectionType = (connection ? connection.effectiveType : undefined);
   }
-  data.device = getDeviceType();
+
+  data.device = {
+    'type': getDeviceType(),
+    'os': getDeviceOS(),
+    'touchPoints': (navigator.maxTouchPoints ? navigator.maxTouchPoints : 0),
+    'pixelRatio': devicePixelRatio || 1
+  }
   data.browser = getBrowser();
 
   if (TIMESTAMPS === 1) {
@@ -108,7 +115,7 @@ function prepareData(performanceObject : any ) : DataObject {
     data.firstContenfulPaint = (paint.length > 1 ?
       paint[1].startTime : undefined);
     data.largestContentfulPaint = 0;
-    const entries = performance.getEntries();
+    const entries : PerformanceEntryList = performance.getEntries();
     for (const entry of entries) {
       data.largestContentfulPaint = Math.max(data.largestContentfulPaint, entry.startTime);
     }
@@ -125,6 +132,15 @@ function prepareData(performanceObject : any ) : DataObject {
   if (TTFB === 1) {
     data.ttfb = timings.responseStart - timings.navigationStart;
   }
+
+  data.transferSize = 0;
+  if (TRANSFER === 1) {
+    const resources : PerformanceEntryList = performance.getEntriesByType("resource");
+    for (const resource of resources) {
+      data.transferSize += ((resource as any).transferSize ? (resource as any).transferSize : 0);
+    }
+  }
+
   return data;
 }
 

@@ -1,3 +1,5 @@
+import { DeviceObject } from "./deviceObject";
+
 export class DataObject {
   cls? : number;
   connectStart? : number;
@@ -23,7 +25,7 @@ export class DataObject {
   domLoading? : number;
   origin? : string;
   effectiveConnectionType? : string;
-  device? : string;
+  device? : DeviceObject;
   domLoad? : number;
   fullyLoad? : number;
   compressionRatio? : number;
@@ -43,6 +45,7 @@ export class DataObject {
   timeToInteractive? : number;
   iteractiveToComplete? : number;
   latency? : number;
+  transferSize? : number;
 
   constructor(cls? : number) {
     cls = cls;
